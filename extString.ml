@@ -38,7 +38,7 @@ type escape_state =
   | Escape
   | HexEscape of int * int
 
-let unescape str =
+let unescaped str =
   let state, pos =
     BatString.fold_left (fun (state, pos) c ->
       match c with
