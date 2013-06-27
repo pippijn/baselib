@@ -1,0 +1,66 @@
+# Target
+Target		= baselib
+Description	= Base library
+Version		= 0.1
+
+# Sources
+Modules[] =
+	BaseOptions
+	Bit2d
+	BitSet
+	CharMap
+	CharStream
+	Cmdline
+	DenseIntMap
+	ExtArray
+	ExtFormat
+	ExtInt
+	ExtList
+	ExtString
+	HashStack
+	IntMap
+	IntegralModule
+	Levenshtein
+	Ptmap
+	Sched
+	SexpChar
+	SexpHashtbl
+	SexpMap
+	SexpSet
+	SexpString
+	Sig
+	SparseBitSet
+	StringMap
+	StringSet
+	TermColour
+	TestFramework
+	Timing
+	Valgrind
+	Zlib
+
+CSources[] =
+	ml_BitSet
+	ml_Sched
+	ml_Valgrind
+	ml_Zlib
+
+CHeaders[] =
+	ml_BitSet-custom.h
+	ml_BitSet-raw.h
+
+# Library dependencies
+Requires[] =
+	batteries
+	sexplib.syntax
+
+# Camlp4
+Flags. +=
+  $|bit2d.ml|		= -syntax camlp4o
+  $|integralModule.ml|	= -syntax camlp4o
+  $|denseIntMap.ml|	= -syntax camlp4o
+  $|sig.ml|		= -syntax camlp4o
+
+# Link with the C++ standard library and zlib
+OCAML_LIB_FLAGS	+= -cclib '-lstdc++ -lz'
+
+ocaml-library ()
