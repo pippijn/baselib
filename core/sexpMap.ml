@@ -1,5 +1,5 @@
 module type S = sig
-  include BatMap.S
+  include Map.S
 
   open Sexplib
 
@@ -14,7 +14,7 @@ end
 module Make(T : Sig.OrderedConvertibleType) : S with type key = T.t = struct
   open Sexplib
 
-  include BatMap.Make(T)
+  include Map.Make(T)
 
 
   let of_list bindings =

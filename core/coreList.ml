@@ -1,3 +1,5 @@
+let cons h t = h :: t
+
 let iter_until f l =
   List.fold_left (fun finished head ->
     finished || f head

@@ -1,5 +1,5 @@
 module type S = sig
-  include BatSet.S
+  include Set.S
   include Sig.OrderedConvertibleType with type t := t
 
   val of_list : elt list -> t
@@ -8,7 +8,7 @@ end
 module Make(T : Sig.OrderedConvertibleType) : S with type elt = T.t = struct
   open Sexplib
 
-  include BatSet.Make(T)
+  include Set.Make(T)
 
 
   let of_list elts =

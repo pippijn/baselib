@@ -3,7 +3,7 @@ open Sexplib.Conv
 type t = int with sexp
 
 let compare (a : t) (b : t) : int = a - b
-let hash : t -> int = BatPervasives.identity
+let hash : t -> int = BasePervasives.identity
 let equal : t -> t -> bool = (==)
 
 external to_int : t -> int = "%identity"

@@ -37,8 +37,8 @@ module Make(T : Sig.IntegralType) = struct
 
   let fold_left = Array.fold_left
   let fold_right = Array.fold_right
-  let foldl_untili f = ExtArray.foldl_untili (mapi_fun f)
-  let foldl_until = ExtArray.foldl_until
+  let foldl_untili f = CoreArray.foldl_untili (mapi_fun f)
+  let foldl_until = CoreArray.foldl_until
   let iteri f = Array.iteri (mapi_fun f)
   let iter = Array.iter
   let map = Array.map
@@ -48,8 +48,8 @@ module Make(T : Sig.IntegralType) = struct
   let mem = BatArray.mem
   let memq = BatArray.memq
 
-  let sum = ExtArray.sum
-  let count = ExtArray.count
+  let sum = CoreArray.sum
+  let count = CoreArray.count
 end
 
 include Make(struct

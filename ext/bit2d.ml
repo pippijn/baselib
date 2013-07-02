@@ -74,6 +74,6 @@ module Make(T : Sig.IntegralType) = struct
     done
 
 
-  let readonly = BatPervasives.identity
+  let readonly = BasePervasives.identity
 
 end

@@ -1,36 +1,49 @@
-include String
+let of_char = String.make 1
 
 
-let without_prefix prefix str =
-  if BatString.starts_with str prefix then
-    let plen = String.length prefix in
-    let nlen = String.length str in
-    Some (String.sub str plen (nlen - plen))
-  else
-    None
-
-let without_prefixes prefixes str =
-  List.fold_left (fun result prefix ->
-    match without_prefix prefix str with
-    | Some _ as result -> result
-    | None -> result
-  ) None prefixes
+let fold_left f a s =
+  let rec fold n f a s =
+    if n = String.length s then
+      a
+    else
+      fold (n + 1) f (f a s.[n]) s
+  in
+  fold 0 f a s
 
 
-let without_suffix suffix str =
-  if BatString.ends_with str suffix then
-    let slen = String.length suffix in
-    let nlen = String.length str in
-    Some (String.sub str 0 (nlen - slen))
-  else
-    None
+let fold_right f s b =
+  let rec fold n f s b =
+    if n = 0 then
+      b
+    else
+      fold (n - 1) f s (f s.[n - 1] b)
+  in
+  fold (String.length s) f s b
 
-let without_suffixes suffixes str =
-  List.fold_left (fun result suffix ->
-    match without_suffix suffix str with
-    | Some _ as result -> result
-    | None -> result
-  ) None suffixes
+
+let rec nsplit s sep =
+  assert (String.length sep = 1);
+  try
+    let pos = String.index s sep.[0] in
+    String.sub s 0 pos :: nsplit (String.sub s (pos + 1) (String.length s - pos - 1)) sep
+  with Not_found ->
+    [s]
+
+
+let of_foldable length fold_left l =
+  let res = String.create (length l) in
+  ignore (fold_left (fun i c ->
+    res.[i] <- c;
+    i + 1
+  ) 0 l);
+  res
+
+
+let of_list = of_foldable List.length List.fold_left
+let of_array = of_foldable Array.length Array.fold_left
+
+let to_list s =
+  fold_right CoreList.cons s []
 
 
 type escape_state =
@@ -40,7 +53,7 @@ type escape_state =
 
 let unescaped str =
   let state, pos =
-    BatString.fold_left (fun (state, pos) c ->
+    fold_left (fun (state, pos) c ->
       match c with
       | '"' | '\'' | '\\' when state == Escape -> str.[pos] <- c; NoEscape, pos + 1
       | 't'  when state == Escape -> str.[pos] <- '\t'; NoEscape, pos + 1

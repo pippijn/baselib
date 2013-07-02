@@ -3,6 +3,8 @@ let section_separator section = ("\n" ^ section ^ ":", Arg.Unit ignore, "")
 let specs = ref [section_separator "help"]
 let actions = ref []
 
+let exe = Sys.argv.(0)
+
 
 let register ?action section spec =
   specs := section_separator section :: spec @ !specs;
@@ -39,7 +41,7 @@ let run f =
 
   Arg.(parse (align specs)
     (fun input -> inputs := input :: !inputs)
-    ("Usage: " ^ BatStd.exe ^ " [option...] <input...>")
+    ("Usage: " ^ exe ^ " [option...] <input...>")
   );
 
   let inputs = List.rev !inputs in
