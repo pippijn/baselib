@@ -5,53 +5,57 @@ Version		= 0.1
 
 # Sources
 Modules[] =
-	BaseOptions
-	Bit2d
-	BitSet
-	CharMap
-	CharStream
-	Cmdline
-	DenseIntMap
-	ExtArray
-	ExtFormat
-	ExtInt
-	ExtList
-	ExtString
-	HashStack
-	IntMap
-	IntegralModule
-	Levenshtein
-	Ptmap
-	Sched
-	SexpChar
-	SexpHashtbl
-	SexpMap
-	SexpSet
-	SexpString
-	Sig
-	SparseBitSet
-	StringMap
-	StringSet
-	TermColour
-	TestFramework
-	Timing
-	Valgrind
-	Zlib
+  BaseOptions
+  Bit2d
+  BitSet
+  CharMap
+  CharStream
+  Cmdline
+  DenseIntMap
+  ExtArray
+  ExtFormat
+  ExtInt
+  ExtList
+  ExtString
+  HashStack
+  IntMap
+  IntegralModule
+  Levenshtein
+  Ptmap
+  Sched
+  SexpChar
+  SexpHashtbl
+  SexpMap
+  SexpSet
+  SexpString
+  Sig
+  SparseBitSet
+  StringMap
+  StringSet
+  TermColour
+  TestFramework
+  Timing
+  Valgrind
+  Zlib
 
-CSources[] =
-	ml_BitSet
-	ml_Sched
-	ml_Valgrind
-	ml_Zlib
+Sources[] =
+  ml_BitSet.cpp
+  ml_Sched.c
+  ml_Valgrind.cpp
+  ml_Zlib.c
 
-CHeaders[] =
-	ml_BitSet-custom.h
-	ml_BitSet-raw.h
+Headers[] =
+  ml_BitSet-custom.h
+  ml_BitSet-raw.h
 
 # Library dependencies
-Requires[] =
-	batteries
-	sexplib.syntax
+OCaml-Requires[] =
+  batteries
+  sexplib.syntax
+
+# Link with zlib
+C-Requires[] =
+  z
 
 # Camlp4
 Flags. +=
@@ -60,7 +64,4 @@ Flags. +=
   $|denseIntMap.ml|	= -syntax camlp4o
   $|sig.ml|		= -syntax camlp4o
 
-# Link with the C++ standard library and zlib
-OCAML_LIB_FLAGS	+= -cclib '-lstdc++ -lz'
-
-ocaml-library ()
+library (.DEFAULT)
