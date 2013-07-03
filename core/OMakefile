@@ -1,5 +1,5 @@
 # Target
-Target		= corelib
+Name		= corelib
 Description	= Base library core
 Version		= 0.1
 
@@ -47,4 +47,4 @@ Flags. +=
   $|integralModule.ml|	= -syntax camlp4o
   $|sig.ml|		= -syntax camlp4o
 
-library (.DEFAULT)
+library-install (.DEFAULT)

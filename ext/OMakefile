@@ -1,5 +1,5 @@
 # Target
-Target		= baselib
+Name		= baselib
 Description	= Base library
 Version		= 0.1
 
@@ -39,4 +39,4 @@ Flags. +=
   $|bit2d.ml|		= -syntax camlp4o
   $|denseIntMap.ml|	= -syntax camlp4o
 
-library (.DEFAULT)
+library-install (.DEFAULT)
