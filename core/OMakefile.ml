@@ -6,8 +6,6 @@ install Library ".DEFAULT" [
 
   (* Sources *)
   Modules [
-    "BaseOptions";
-    "BasePervasives";
     (*"BitSet";*)
     "CharMap";
     "CharStream";
@@ -16,6 +14,8 @@ install Library ".DEFAULT" [
     "CoreFormat";
     "CoreInt";
     "CoreList";
+    "CoreOptions";
+    "CorePervasives";
     "CoreString";
     "HashStack";
     "IntMap";

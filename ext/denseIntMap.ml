@@ -1,8 +1,7 @@
+open CorePervasives
 open Sexplib.Conv
 
 type ('a, 'mutability, 'integer) repr = 'a array with sexp
-
-let identity = BatPervasives.identity
 
 let append = Array.append
 
