@@ -11,6 +11,22 @@ type section = {
 
 
 (* +=====~~~-------------------------------------------------------~~~=====+ *)
+(* |                      Test driver command line options                 | *)
+(* +=====~~~-------------------------------------------------------~~~=====+ *)
+
+let _depend		= ref false
+
+
+let () =
+  Cmdline.register "general" Arg.([
+    "-depend",		Set _depend,		" print tested tools as make dependencies";
+  ])
+
+
+let _depend		() = !_depend
+
+
+(* +=====~~~-------------------------------------------------------~~~=====+ *)
 (* |                          Colours for terminal output                  | *)
 (* +=====~~~-------------------------------------------------------~~~=====+ *)
 
@@ -51,7 +67,7 @@ let output_endline out line =
 
 
 let output_underline dot out str =
-  ignore (BatString.fold_left (fun skip c ->
+  ignore (CoreString.fold_left (fun skip c ->
     match c with
     | '' -> true
     | 'm' when skip -> false
@@ -229,10 +245,17 @@ let run_tests root testdir filters error_log result section =
 
 
 let run_testsuite name testsuite filters =
+  begin if _depend () then
+    let tools = List.map (fun { tool } -> tool) testsuite in
+    print_endline
+      (String.concat " " (BatList.sort_unique String.compare tools));
+    exit 0;
+  end;
+
   let root, testdir, filters =
     match filters with
     | root :: testdir :: filters -> root, testdir, filters
-    | _ -> failwith "Usage: runtests <srcdir> [filters...]"
+    | _ -> failwith "Usage: runtests <rootdir> <srcdir> [filters...]"
   in
 
   with_out (name ^ ".rst") (fun error_log ->
