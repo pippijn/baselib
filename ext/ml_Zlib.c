@@ -7,13 +7,15 @@
 #include <zlib.h>
 
 
+/* Destroys its argument */
 static value
-make_string (char const *s, size_t l)
+make_string (char *s, size_t l)
 {
   CAMLparam0 ();
   CAMLlocal1 (r);
   r = caml_alloc_string (l);
   memcpy (String_val (r), s, l);
+  free (s);
 
   CAMLreturn (r);
 }
@@ -28,7 +30,7 @@ ml_Zlib_compress (value s)
   char const *source = String_val (s);
 
   uLongf dsize = sourceSize + (sourceSize * 0.1f) + 16;
-  char destination[dsize];
+  char *destination = malloc (dsize);
 
   int result = compress ((unsigned char *)destination, &dsize, (unsigned char const *)source, sourceSize);
 
@@ -47,7 +49,7 @@ ml_Zlib_uncompress (value s, value length)
   unsigned int sourceSize = caml_string_length (s);
   char const *source = String_val (s);
 
-  char destination[len];
+  char *destination = malloc (len);
 
   int result = uncompress ((unsigned char *)destination, &len, (const unsigned char *)source, sourceSize);
 
