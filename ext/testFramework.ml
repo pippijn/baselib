@@ -7,6 +7,17 @@ type section = {
   suffixes : string list;
   options  : string option;
   dirs     : string list;
+  filter   : string -> string;
+  time     : float;
+}
+
+let empty = {
+  tool     = "";
+  suffixes = [];
+  options  = None;
+  dirs     = [];
+  filter   = CorePervasives.identity;
+  time     = Unix.time ();
 }
 
 
@@ -55,7 +66,7 @@ let execute cmd =
 (* +=====~~~-------------------------------------------------------~~~=====+ *)
 
 
-let (/) a b = a ^ "/" ^ b
+let (/) = Filename.concat
 
 
 let output_newline out =
@@ -121,11 +132,12 @@ let run_test root testdir error_log section (pass, fail, total_time) source refe
   (* Retrieve command line options from file *)
   let opts =
     try
+      (* Get the first line of the file *)
       let stream = open_in sourcefile in
       let line = input_line stream in
       close_in stream;
 
-      match ExtString.without_prefixes ["//+"; "#+"; "(*+"] line with
+      match ExtString.without_prefixes ["//+"; "#+"; "(*+"; "--+"; "/*+"] line with
       | Some opts -> opts
       | None -> ""
     with End_of_file ->
@@ -137,13 +149,20 @@ let run_test root testdir error_log section (pass, fail, total_time) source refe
   let start = Unix.gettimeofday () in
 
   let cmd =
-    Printf.sprintf "%s/_install/bin/%s %s %s %s 2>&1"
-      root section.tool tool_opts opts sourcefile
+    Printf.sprintf "%s %s %s %s 2>&1"
+      (root / "_install" / "bin" / section.tool)
+      tool_opts opts sourcefile
   in
   let stream = Unix.open_process_in cmd in
   let produced =
     List.map (fun str ->
-      snd (BatString.replace ~str ~sub:(root / testdir / "") ~by:"")
+      let (_, line) =
+        BatString.replace
+          ~str
+          ~sub:(root / testdir / "")
+          ~by:""
+      in
+      section.filter line
     ) (read_all stream)
   in
   let status = Unix.close_process_in stream in
@@ -261,7 +280,7 @@ let run_testsuite name testsuite filters =
   with_out (name ^ ".rst") (fun error_log ->
     begin
       let open Unix in
-      let { tm_min; tm_hour; tm_mday; tm_mon; tm_year; } = localtime (time ()) in
+      let { tm_min; tm_hour; tm_mday; tm_mon; tm_year; } = localtime empty.time in
 
       Printf.fprintf error_log "Error log for test suite run on %04d-%02d-%02d %02d:%02d\n"
         (tm_year + 1900)
