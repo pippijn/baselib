@@ -183,11 +183,11 @@ let run_test root testdir error_log section (pass, fail, total_time) source refe
   (* Compare produced and expected outputs *)
   let time = finish -. start in
   if produced = expected then (
-    Printf.printf "[%sPASS%s] %s (%fs)\n" green reset source time;
+    Printf.printf "[%sPASS%s] %-20s %.03f sec\n" green reset source time;
 
     (pass + 1, fail, total_time +. time)
   ) else (
-    Printf.printf "[%sFAIL%s] %s (%fs)\n" red   reset source time;
+    Printf.printf "[%sFAIL%s] %-20s %.03f sec\n" red   reset source time;
 
     (* Write results to error log *)
     let print_output = function
