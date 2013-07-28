@@ -221,7 +221,7 @@ compute_size (value obj, value_set &seen, int level = 0)
 
   header_t hd = Hd_val (obj);
   tag_t tag = Tag_hd (hd);
-  int size = sizeof hd;
+  size_t size = sizeof hd;
 
   switch (tag)
     {
@@ -230,7 +230,7 @@ compute_size (value obj, value_set &seen, int level = 0)
         mlsize_t wosize = Wosize_hd (hd);
         size += wosize * sizeof (value);
 
-        for (int i = 0; i < Wosize_hd (hd); i++)
+        for (size_t i = 0; i < Wosize_hd (hd); i++)
           size += compute_size (Field (obj, i), seen, level + 1);
         break;
       }
