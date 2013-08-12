@@ -14,6 +14,7 @@ install Library ".DEFAULT" [
     "CoreFormat";
     "CoreInt";
     "CoreList";
+    "CoreOption";
     "CoreOptions";
     "CorePervasives";
     "CoreString";
