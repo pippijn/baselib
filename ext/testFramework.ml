@@ -57,7 +57,7 @@ let slurp ic =
 
 
 let execute cmd =
-  BatStd.with_dispose ~dispose:(fun ic -> ignore (Unix.close_process_in ic))
+  BatPervasives.with_dispose ~dispose:(fun ic -> ignore (Unix.close_process_in ic))
     slurp (Unix.open_process_in cmd)
 
 
@@ -92,7 +92,7 @@ let output_underline dot out str =
 
 let with_out file f =
   let out = open_out file in
-  BatStd.with_dispose ~dispose:close_out f out
+  BatPervasives.with_dispose ~dispose:close_out f out
 
 
 let write_all stream lines =
