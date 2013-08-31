@@ -12,3 +12,9 @@ let rec fold_left f x l h =
     x
   else
     fold_left f (f x l) (l + 1) h
+
+let rec fold_right f l h x =
+  if h == l - 1 then
+    x
+  else
+    fold_right f l (h - 1) (f h x)
