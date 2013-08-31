@@ -1,4 +1,4 @@
-let section_separator section = ("\n" ^ section ^ ":", Arg.Unit ignore, "")
+let section_separator section = ("\n" ^ section ^ ":", Arg.Unit ignore, " ")
 
 let specs = ref [section_separator "help"]
 let actions = ref []
