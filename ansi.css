@@ -1,0 +1,28 @@
+html {
+   background-color: black;
+   color: white;
+}
+
+.bold {
+   font-weight: bold;
+}
+
+.yellow {
+   color: #aa0;
+}
+
+.red {
+   color: #a00;
+}
+
+.green {
+   color: #0a0;
+}
+
+.cyan {
+   color: #0aa;
+}
+
+.pink {
+   color: #d3d;
+}
