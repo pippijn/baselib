@@ -102,8 +102,11 @@ let write_all stream lines =
 let read_all stream =
   let output_lines = ref [] in
   try
-    while true do
+    for i = 0 to 1000 do
       output_lines := input_line stream :: !output_lines
+    done;
+    while true do
+      ignore (input_line stream)
     done;
     assert false
   with End_of_file ->
