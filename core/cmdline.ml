@@ -14,9 +14,8 @@ let register ?action section spec =
       actions := action :: !actions
 
 
-let run f =
+let run ?(args=[]) f =
   Printexc.record_backtrace true;
-  let inputs = ref [] in
 
   let specs =
     List.map (fun (arg, kind, desc) ->
@@ -39,10 +38,37 @@ let run f =
     ) !specs
   in
 
-  Arg.(parse (align specs)
-    (fun input -> inputs := input :: !inputs)
-    ("Usage: " ^ exe ^ " [option...] <input...>")
-  );
+  let offset = List.length args in
+  let argv = Array.make (Array.length Sys.argv + offset) "" in
+
+  (* First argument is the program name. *)
+  argv.(0) <- exe;
+
+  (* Then come the program specified arguments. *)
+  List.iteri (fun i arg ->
+    argv.(i + 1) <- arg
+  ) args;
+
+  (* Finally, the rest of the command line arguments. *)
+  for i = offset + 1 to Array.length argv - 1 do
+    argv.(i) <- Sys.argv.(i - offset)
+  done;
+
+  let inputs = ref [] in
+
+  begin try
+    Arg.(parse_argv argv (align specs)
+      (fun input -> inputs := input :: !inputs)
+      ("Usage: " ^ exe ^ " [option...] <input...>")
+    )
+  with
+  | Arg.Bad msg ->
+      Printf.eprintf "%s" msg;
+      exit 2
+  | Arg.Help msg ->
+      Printf.printf "%s" msg;
+      exit 0
+  end;
 
   let inputs = List.rev !inputs in
 
