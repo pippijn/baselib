@@ -1,28 +1,27 @@
 module Make(T : Hashtbl.S) = struct
   type 'a t = {
     table : 'a T.t;
-    mutable stack : (T.key * 'a) list;
+    stack : (T.key * 'a) Stack.t;
   }
 
 
   let create size = {
     table = T.create size;
-    stack = [];
+    stack = Stack.create ();
   }
 
 
   let is_empty stack =
-    stack.stack = []
+    Stack.is_empty stack.stack
 
 
   let push key value stack =
     T.add stack.table key value;
-    stack.stack <- (key, value) :: stack.stack
+    Stack.push (key, value) stack.stack
 
 
   let pop stack =
-    let key, value = List.hd stack.stack in
-    stack.stack <- List.tl stack.stack;
+    let key, value = Stack.pop stack.stack in
     T.remove stack.table key;
     value
 
