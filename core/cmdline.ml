@@ -45,9 +45,10 @@ let run ?(args=[]) f =
   argv.(0) <- exe;
 
   (* Then come the program specified arguments. *)
-  List.iteri (fun i arg ->
-    argv.(i + 1) <- arg
-  ) args;
+  ignore (List.fold_left (fun i arg ->
+    argv.(i + 1) <- arg;
+    i + 1
+  ) 0 args);
 
   (* Finally, the rest of the command line arguments. *)
   for i = offset + 1 to Array.length argv - 1 do
