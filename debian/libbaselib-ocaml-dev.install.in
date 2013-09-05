@@ -1,0 +1,4 @@
+@OCamlStdlibDir@/baselib/*.cm[ix]
+@OCamlStdlibDir@/baselib/*.ml*
+OPT: @OCamlStdlibDir@/baselib/*.a
+OPT: @OCamlStdlibDir@/baselib/*.cmxa
