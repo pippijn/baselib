@@ -46,9 +46,9 @@ let run ?(args=[]) f =
 
   (* Then come the program specified arguments. *)
   ignore (List.fold_left (fun i arg ->
-    argv.(i + 1) <- arg;
+    argv.(i) <- arg;
     i + 1
-  ) 0 args);
+  ) 1 args);
 
   (* Finally, the rest of the command line arguments. *)
   for i = offset + 1 to Array.length argv - 1 do
