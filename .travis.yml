@@ -1,9 +1,5 @@
 language: c
-script:
-   - git clone --depth=1 https://github.com/pippijn/obuild
-   - obuild/script/prepare-tree .
-   - cd obuild
-   - omake
+script: dpkg-buildpackage -b -us -uc
 
 install:
    - sudo apt-get install omake noweb valgrind libbatteries-ocaml-dev libsexplib-camlp4-dev libderiving-ocsigen-ocaml-dev

@@ -1,3 +1,10 @@
 @OCamlStdlibDir@/baselib/META
 @OCamlStdlibDir@/baselib/*.cma
-DYN: @OCamlStdlibDir@/baselib/*.cmxs
+@OCamlStdlibDir@/baselib/*.cmxs
+
+@OCamlStdlibDir@/corelib/META
+@OCamlStdlibDir@/corelib/*.cma
+@OCamlStdlibDir@/corelib/*.cmxs
+
+@OCamlStdlibDir@/stublibs/*.so
+@OCamlStdlibDir@/stublibs/*.so.owner
