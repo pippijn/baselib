@@ -6,7 +6,7 @@ script:
    - omake
 
 install:
-   - sudo apt-get install omake noweb libbatteries-ocaml-dev libsexplib-camlp4-dev libderiving-ocsigen-ocaml-dev
+   - sudo apt-get install omake noweb valgrind libbatteries-ocaml-dev libsexplib-camlp4-dev libderiving-ocsigen-ocaml-dev
 
 # whitelist
 branches:
