@@ -1,6 +1,6 @@
 language: c
 script:
-   - git clone https://github.com/pippijn/obuild
+   - git clone --depth=1 https://github.com/pippijn/obuild
    - obuild/script/prepare-tree .
    - cd obuild
    - omake
