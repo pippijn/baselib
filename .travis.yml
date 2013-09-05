@@ -1,0 +1,15 @@
+language: c
+script:
+   - git clone https://github.com/pippijn/obuild
+   - obuild/script/prepare-tree .
+   - cd obuild
+   - omake
+
+install:
+   - sudo apt-get install omake libbatteries-ocaml-dev libsexplib-camlp4-dev libderiving-ocsigen-ocaml-dev
+
+# whitelist
+branches:
+   only:
+      - master
+      - /.*\/staging/
