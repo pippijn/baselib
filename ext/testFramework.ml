@@ -206,7 +206,8 @@ let run_test root testdir error_log section (pass, fail, total_time) source refe
     output_string error_log title;
     output_char error_log '\n';
     output_underline '-' error_log title;
-    output_string error_log "\n\nexpected";
+    output_string error_log ("\n\ncommand: ``" ^ cmd ^ "``\n");
+    output_string error_log "\nexpected";
     print_output expected;
     output_string error_log "\nproduced";
     print_output produced;
