@@ -6,5 +6,5 @@
 @OCamlStdlibDir@/corelib/*.cma
 @OCamlStdlibDir@/corelib/*.cmxs
 
-@OCamlStdlibDir@/stublibs/*.so
-@OCamlStdlibDir@/stublibs/*.so.owner
+OPT: @OCamlStdlibDir@/stublibs/*.so
+OPT: @OCamlStdlibDir@/stublibs/*.so.owner
