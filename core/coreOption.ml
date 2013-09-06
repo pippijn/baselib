@@ -11,3 +11,7 @@ let get = function
 let map f = function
   | None -> None
   | Some v -> Some (f v)
+
+let default x = function
+  | None -> x
+  | Some v -> v

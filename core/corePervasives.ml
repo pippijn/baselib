@@ -7,6 +7,7 @@ let (|-) f g x = g (f x)
 let (%>) f g x = g (f x)
 let flip f x y = f y x
 let tap f x = f x; x
+let const a _ = a
 
 
 let with_dispose dispose f x =
