@@ -42,4 +42,5 @@ override_dh_install:
 
 .PHONY: override_dh_auto_clean
 override_dh_auto_clean:
-	rm -rf obuild
+	rm -rf _build _install .*omakedb*
+	find . -name "*.omc" -delete
