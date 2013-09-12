@@ -4,43 +4,18 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-DESTDIR = $(CURDIR)/debian/tmp
+include $(shell obuild --where)/debian/rules.common
 
 include /usr/share/ocaml/ocamlvars.mk
 
-prefix = /usr
-
-OMAKE_FLAGS = prefix='$(prefix)' DESTDIR='$(DESTDIR)'
+DESTDIR = $(CURDIR)/debian/tmp
 
 OCAMLFIND_DESTDIR = $(DESTDIR)/$(OCAML_STDLIB_DIR)
 export OCAMLFIND_DESTDIR
 
+override_dh_auto_install: $(OCAMLFIND_DESTDIR)/stublibs
+$(OCAMLFIND_DESTDIR)/stublibs:
+	mkdir -p $@
+
 %:
 	dh --with ocaml $@
-
-.PHONY: override_dh_auto_configure
-override_dh_auto_configure:
-	obuild $(OMAKE_FLAGS) --configure nop
-
-.PHONY: override_dh_auto_build
-override_dh_auto_build:
-	obuild $(OMAKE_FLAGS)
-
-.PHONY: override_dh_auto_test
-override_dh_auto_test:
-	obuild $(OMAKE_FLAGS) check
-
-.PHONY: override_dh_auto_install
-override_dh_auto_install:
-	mkdir -p '$(OCAMLFIND_DESTDIR)/stublibs'
-	obuild $(OMAKE_FLAGS) install
-
-.PHONY: override_dh_install
-override_dh_install:
-	find $(CURDIR)/debian -type f
-	dh_install --fail-missing
-
-.PHONY: override_dh_auto_clean
-override_dh_auto_clean:
-	rm -rf _build _install .*omakedb*
-	find . -name "*.omc" -delete
