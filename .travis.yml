@@ -8,7 +8,7 @@ install:
    - chmod +x travis-depend
    - ./travis-depend obuild
    # Package dependencies.
-   - sudo mk-build-deps -i
+   - sudo mk-build-deps -ir
 
 # whitelist
 branches:
