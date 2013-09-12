@@ -5,37 +5,35 @@
 #export DH_VERBOSE=1
 
 DESTDIR = $(CURDIR)/debian/tmp
-FLAGS =
 
 include /usr/share/ocaml/ocamlvars.mk
 
+prefix = /usr
+
+OMAKE_FLAGS = prefix='$(prefix)' DESTDIR='$(DESTDIR)'
+
 OCAMLFIND_DESTDIR = $(DESTDIR)/$(OCAML_STDLIB_DIR)
 export OCAMLFIND_DESTDIR
-
-prefix = /usr
 
 %:
 	dh --with ocaml $@
 
 .PHONY: override_dh_auto_configure
 override_dh_auto_configure:
-	if [ ! -d obuild ]; then					\
-	  git clone --depth=1 https://github.com/pippijn/obuild;	\
-	fi
-	obuild/script/prepare-tree .
+	cd obuild && obuild $(OMAKE_FLAGS) --configure
 
 .PHONY: override_dh_auto_build
 override_dh_auto_build:
-	cd obuild && omake
+	cd obuild && obuild $(OMAKE_FLAGS)
 
 .PHONY: override_dh_auto_test
 override_dh_auto_test:
-	cd obuild && omake check
+	cd obuild && obuild $(OMAKE_FLAGS) check
 
 .PHONY: override_dh_auto_install
 override_dh_auto_install:
 	mkdir -p '$(OCAMLFIND_DESTDIR)/stublibs'
-	cd obuild && omake install prefix='$(prefix)' DESTDIR='$(DESTDIR)'
+	cd obuild && obuild $(OMAKE_FLAGS) install
 
 .PHONY: override_dh_install
 override_dh_install:
