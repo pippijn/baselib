@@ -20,23 +20,24 @@ export OCAMLFIND_DESTDIR
 
 .PHONY: override_dh_auto_configure
 override_dh_auto_configure:
-	cd obuild && obuild $(OMAKE_FLAGS) --configure
+	obuild $(OMAKE_FLAGS) --configure nop
 
 .PHONY: override_dh_auto_build
 override_dh_auto_build:
-	cd obuild && obuild $(OMAKE_FLAGS)
+	obuild $(OMAKE_FLAGS)
 
 .PHONY: override_dh_auto_test
 override_dh_auto_test:
-	cd obuild && obuild $(OMAKE_FLAGS) check
+	obuild $(OMAKE_FLAGS) check
 
 .PHONY: override_dh_auto_install
 override_dh_auto_install:
 	mkdir -p '$(OCAMLFIND_DESTDIR)/stublibs'
-	cd obuild && obuild $(OMAKE_FLAGS) install
+	obuild $(OMAKE_FLAGS) install
 
 .PHONY: override_dh_install
 override_dh_install:
+	find $(CURDIR)/debian -type f
 	dh_install --fail-missing
 
 .PHONY: override_dh_auto_clean
