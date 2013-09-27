@@ -236,6 +236,6 @@ end
 module Make(T : Sig.IntegralType) = struct
   include Set
 
-  let add v s = add (T.to_int v) s
-  let mem v s = mem (T.to_int v) s
+  let add v s = add (v : T.t :> int) s
+  let mem v s = mem (v : T.t :> int) s
 end
