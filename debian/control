@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Pippijn van Steenhoven <pip88nl@gmail.com>
 Build-Depends:
  debhelper (>= 8.0.0),
- obuild (>= 0.1.1), noweb,
+ obuild (>= 0.1.1),
  dh-ocaml (>= 0.9),
  ocaml-nox (>= 3.12),
  ocaml-findlib,
@@ -12,6 +12,7 @@ Build-Depends:
  libderiving-ocsigen-ocaml-dev,
  libsexplib-camlp4-dev,
  libz-dev | zlib1g-dev,
+ noweb,
  valgrind
 Standards-Version: 3.9.2
 Homepage: https://github.com/pippijn/baselib
