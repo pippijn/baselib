@@ -22,7 +22,7 @@ Vcs-Browser: https://github.com/pippijn/baselib
 
 Package: libbaselib-ocaml-dev
 Architecture: any
-Depends: ${ocaml:Depends}, ${misc:Depends}
+Depends: ${ocaml:Depends}, ${misc:Depends}, libfindlib-ocaml-dev
 Provides: ${ocaml:Provides}
 Recommends: ocaml-findlib
 Description: Common library for OCaml projects
