@@ -5,17 +5,16 @@ Maintainer: Pippijn van Steenhoven <pip88nl@gmail.com>
 Uploaders: 
   Pippijn van Steenhoven <pip88nl@gmail.com>
 Build-Depends:
-  obuild,
+  debhelper (>= 8.0.0),
+  obuild, noweb,
+  dh-ocaml,
   ocaml-nox (>= 3.12),
   ocaml-findlib,
-  git,
-  valgrind,
-  noweb,
   libbatteries-ocaml-dev,
   libderiving-ocsigen-ocaml-dev,
   libsexplib-camlp4-dev,
-  dh-ocaml,
-  debhelper (>= 8.0.0)
+  libz-dev | zlib1g-dev,
+  valgrind
 Standards-Version: 3.9.2
 Homepage: https://github.com/pippijn/baselib
 Vcs-Git: git://github.com/pippijn/baselib
