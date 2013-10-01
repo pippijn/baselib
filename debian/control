@@ -3,38 +3,46 @@ Section: ocaml
 Priority: optional
 Maintainer: Pippijn van Steenhoven <pip88nl@gmail.com>
 Uploaders: 
-  Pippijn van Steenhoven <pip88nl@gmail.com>
+ Pippijn van Steenhoven <pip88nl@gmail.com>
 Build-Depends:
-  debhelper (>= 8.0.0),
-  obuild, noweb,
-  dh-ocaml,
-  ocaml-nox (>= 3.12),
-  ocaml-findlib,
-  libbatteries-ocaml-dev,
-  libderiving-ocsigen-ocaml-dev,
-  libsexplib-camlp4-dev,
-  libz-dev | zlib1g-dev,
-  valgrind
+ debhelper (>= 8.0.0),
+ obuild, noweb,
+ dh-ocaml (>= 0.9),
+ ocaml-nox (>= 3.12),
+ ocaml-findlib,
+ libbatteries-ocaml-dev,
+ libderiving-ocsigen-ocaml-dev,
+ libsexplib-camlp4-dev,
+ libz-dev | zlib1g-dev,
+ valgrind
 Standards-Version: 3.9.2
 Homepage: https://github.com/pippijn/baselib
 Vcs-Git: git://github.com/pippijn/baselib
 Vcs-Browser: https://github.com/pippijn/baselib
 
-Package: libbaselib-ocaml-dev
-Architecture: any
-Depends: ${ocaml:Depends}, ${misc:Depends}, libfindlib-ocaml-dev
-Provides: ${ocaml:Provides}
-Recommends: ocaml-findlib
-Description: Common library for OCaml projects
- This library contains some common modules I use for
- most of my projects.
-
 Package: libbaselib-ocaml
 Architecture: any
-Depends: ${ocaml:Depends}, ${misc:Depends}, ${shlibs:Depends}
+Depends:
+ ${ocaml:Depends},
+ ${misc:Depends},
+ ${shlibs:Depends}
 Provides: ${ocaml:Provides}
 Description: Common library for OCaml projects
  This library contains some common modules I use for
  most of my projects.
  .
  This package contains the shared runtime libraries.
+
+Package: libbaselib-ocaml-dev
+Architecture: any
+Depends:
+ libfindlib-ocaml-dev,
+ libz-dev | zlib1g-dev,
+ ${ocaml:Depends},
+ ${misc:Depends},
+ ${shlibs:Depends}
+Provides: ${ocaml:Provides}
+Recommends: ocaml-findlib
+Description: Common library for OCaml projects
+ This library contains some common modules I use for
+ most of my projects.
