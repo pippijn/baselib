@@ -1,4 +1,4 @@
-baselib (0.1) precise; urgency=low
+baselib (0.1.1) precise; urgency=low
 
   * Initial release. (Closes: #9999)
 
