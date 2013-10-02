@@ -1,7 +1,3 @@
 @OCamlStdlibDir@/baselib/*.a
 @OCamlStdlibDir@/baselib/*.cm[ix]
 @OCamlStdlibDir@/baselib/*.cmxa
-
-@OCamlStdlibDir@/corelib/*.a
-@OCamlStdlibDir@/corelib/*.cm[ix]
-@OCamlStdlibDir@/corelib/*.cmxa

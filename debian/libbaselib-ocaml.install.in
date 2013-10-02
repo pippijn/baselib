@@ -2,9 +2,5 @@
 @OCamlStdlibDir@/baselib/*.cma
 @OCamlStdlibDir@/baselib/*.cmxs
 
-@OCamlStdlibDir@/corelib/META
-@OCamlStdlibDir@/corelib/*.cma
-@OCamlStdlibDir@/corelib/*.cmxs
-
 OPT: @OCamlStdlibDir@/stublibs/*.so
 OPT: @OCamlStdlibDir@/stublibs/*.so.owner
