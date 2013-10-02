@@ -14,7 +14,7 @@ Build-Depends:
  libz-dev | zlib1g-dev,
  noweb,
  valgrind
-Standards-Version: 3.9.2
+Standards-Version: 3.9.4
 Homepage: https://github.com/pippijn/baselib
 Vcs-Git: git://github.com/pippijn/baselib
 Vcs-Browser: https://github.com/pippijn/baselib
