@@ -2,11 +2,9 @@ install Library ".DEFAULT" [
   (* Target *)
   Name		"corelib";
   Description	"Base library core";
-  Version	"0.1";
 
   (* Sources *)
   Modules [
-    (*"BitSet";*)
     "CharMap";
     "CharStream";
     "Cmdline";
@@ -23,7 +21,6 @@ install Library ".DEFAULT" [
     "IntegralModule";
     "Levenshtein";
     "Ptmap";
-    (*"Sched";*)
     "SexpChar";
     "SexpHashtbl";
     "SexpMap";
@@ -34,10 +31,7 @@ install Library ".DEFAULT" [
     "StringMap";
     "StringSet";
     "TermColour";
-    (*"TestFramework";*)
     "Timing";
-    (*"Valgrind";*)
-    (*"Zlib";*)
   ];
 
   (* Library dependencies *)

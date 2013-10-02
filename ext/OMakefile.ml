@@ -2,7 +2,6 @@ install Library ".DEFAULT" [
   (* Target *)
   Name		"baselib";
   Description	"Base library";
-  Version	"0.1";
 
   (* Sources *)
   Modules [
