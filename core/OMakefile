@@ -1,0 +1,42 @@
+Name = corelib
+Description = Base library core
+
+OCaml-Sources[] =
+  CharMap
+  CharStream
+  Cmdline
+  CoreArray
+  CoreFormat
+  CoreInt
+  CoreList
+  CoreOption
+  CoreOptions
+  CorePervasives
+  CoreString
+  HashStack
+  IntMap
+  IntegralModule
+  Levenshtein
+  Ptmap
+  SexpChar
+  SexpHashtbl
+  SexpMap
+  SexpSet
+  SexpString
+  Sig
+  SparseBitSet
+  StringMap
+  StringSet
+  TermColour
+  Timing
+
+OCaml-Requires[] =
+  deriving-ocsigen
+  sexplib.syntax
+
+Flags. +=
+  $|integralModule.ml|	= -syntax camlp4o
+  $|sig.ml|		= -syntax camlp4o
+
+TARGET = $(library-install)
+.DEFAULT: $(TARGET)

@@ -1,0 +1,37 @@
+Name = baselib
+Description = Base library
+
+OCaml-Sources[] =
+  Bit2d
+  BitSet
+  DenseIntMap
+  ExtString
+  Sched
+  TestFramework
+  Valgrind
+  Zlib
+
+C-Sources[] =
+  ml_BitSet.cpp
+  ml_Sched.c
+  ml_Valgrind.cpp
+  ml_Zlib.c
+
+C-Headers[] =
+  ml_BitSet-custom.h
+  ml_BitSet-raw.h
+
+OCaml-Requires[] =
+  batteries
+  corelib
+  sexplib.syntax
+
+C-Requires[] =
+  z
+
+Flags. +=
+  $|bit2d.ml|		= -syntax camlp4o
+  $|denseIntMap.ml|	= -syntax camlp4o
+
+TARGET = $(library-install)
+.DEFAULT: $(TARGET)
