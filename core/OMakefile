@@ -1,5 +1,5 @@
-Name = corelib
-Description = Base library core
+Name		= corelib
+Description	= Base library core
 
 OCaml-Sources[] =
   CharMap

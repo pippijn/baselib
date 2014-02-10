@@ -1,5 +1,5 @@
-Name = baselib
-Description = Base library
+Name		= baselib
+Description	= Base library
 
 OCaml-Sources[] =
   Bit2d
